@@ -179,5 +179,108 @@ class TestPressurePipeline(unittest.TestCase):
         self.assertGreater(scored.loc[0, 'pri_score'], scored.loc[1, 'pri_score'])
 
 
+class TestDeliverableSynchronization(unittest.TestCase):
+    """
+    Automated tests to enforce that canonical pipeline outputs, documentation (README),
+    audit reports, and the published PDF report remain 100% synchronized.
+    """
+
+    def setUp(self):
+        self.base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        self.top_bat_path = os.path.join(self.base_dir, 'outputs', 'top_10_batters.csv')
+        self.top_bowl_path = os.path.join(self.base_dir, 'outputs', 'top_10_bowlers.csv')
+        self.readme_path = os.path.join(self.base_dir, 'README.md')
+        self.audit_path = os.path.join(self.base_dir, 'outputs', 'independent_audit_report.md')
+        self.pdf_path = os.path.join(self.base_dir, 'reports', 'SupeRR_Selector_Round_1_Methodology_Report.pdf')
+
+    def test_canonical_csv_integrity_and_sample_eligibility(self):
+        self.assertTrue(os.path.exists(self.top_bat_path), "top_10_batters.csv missing")
+        self.assertTrue(os.path.exists(self.top_bowl_path), "top_10_bowlers.csv missing")
+
+        top_bat = pd.read_csv(self.top_bat_path)
+        top_bowl = pd.read_csv(self.top_bowl_path)
+
+        # 1. Exactly 10 players
+        self.assertEqual(len(top_bat), 10, "Top 10 Batters must contain exactly 10 rows")
+        self.assertEqual(len(top_bowl), 10, "Top 10 Bowlers must contain exactly 10 rows")
+
+        # 2. Strict eligibility filters (min 120 balls, min 15 matches)
+        self.assertTrue((top_bat['p_balls'] >= 120).all(), "All batters must have >= 120 pressure balls")
+        self.assertTrue((top_bat['p_matches'] >= 15).all(), "All batters must have >= 15 pressure matches")
+        self.assertTrue((top_bowl['p_balls'] >= 120).all(), "All bowlers must have >= 120 pressure balls")
+        self.assertTrue((top_bowl['p_matches'] >= 15).all(), "All bowlers must have >= 15 pressure matches")
+
+        # 3. Monotonically decreasing PRI scores
+        self.assertTrue((top_bat['pri_score'].diff().dropna() <= 0).all(), "Batting PRI must be monotonically decreasing")
+        self.assertTrue((top_bowl['pri_score'].diff().dropna() <= 0).all(), "Bowling PRI must be monotonically decreasing")
+
+        # 4. Correct rankings 1 to 10
+        self.assertEqual(list(top_bat['rank']), list(range(1, 11)))
+        self.assertEqual(list(top_bowl['rank']), list(range(1, 11)))
+
+    def test_readme_rankings_match_canonical_csvs(self):
+        self.assertTrue(os.path.exists(self.readme_path), "README.md missing")
+        with open(self.readme_path, 'r', encoding='utf-8') as f:
+            readme_text = f.read()
+
+        top_bat = pd.read_csv(self.top_bat_path)
+        top_bowl = pd.read_csv(self.top_bowl_path)
+
+        for _, r in top_bat.iterrows():
+            expected_entry = f"| **{int(r['rank'])}** | **{r['player_name']}** |"
+            self.assertIn(expected_entry, readme_text, f"README missing or mismatched batter rank {r['rank']}: {r['player_name']}")
+
+        for _, r in top_bowl.iterrows():
+            expected_entry = f"| **{int(r['rank'])}** | **{r['player_name']}** |"
+            self.assertIn(expected_entry, readme_text, f"README missing or mismatched bowler rank {r['rank']}: {r['player_name']}")
+
+    def test_pdf_report_tables_and_formatting(self):
+        self.assertTrue(os.path.exists(self.pdf_path), "Publication PDF report missing")
+
+        import pdfplumber
+        top_bat = pd.read_csv(self.top_bat_path)
+        top_bowl = pd.read_csv(self.top_bowl_path)
+
+        with pdfplumber.open(self.pdf_path) as pdf:
+            # 1. Total page count must be exactly 5
+            self.assertEqual(len(pdf.pages), 5, f"PDF report must be exactly 5 pages, found {len(pdf.pages)}")
+
+            # 2. Page 3: Batters Table
+            bat_tables = pdf.pages[2].extract_tables()
+            self.assertTrue(len(bat_tables) >= 1, "Page 3 must contain batters table")
+            bat_rows = bat_tables[0][1:]  # skip header
+            self.assertEqual(len(bat_rows), 10, "Page 3 table must have 10 batter rows")
+            for idx, row in enumerate(bat_rows):
+                self.assertEqual(row[0], str(idx + 1), f"Bat rank in PDF wrapped or incorrect: {row[0]}")
+                self.assertEqual(row[1], top_bat.loc[idx, 'player_name'], f"Bat name in PDF mismatch at rank {idx+1}")
+                self.assertEqual(row[2], str(int(top_bat.loc[idx, 'player_id'])))
+
+            # 3. Page 4: Bowlers Table
+            bowl_tables = pdf.pages[3].extract_tables()
+            self.assertTrue(len(bowl_tables) >= 1, "Page 4 must contain bowlers table")
+            bowl_rows = bowl_tables[0][1:]  # skip header
+            self.assertEqual(len(bowl_rows), 10, "Page 4 table must have 10 bowler rows")
+            for idx, row in enumerate(bowl_rows):
+                self.assertEqual(row[0], str(idx + 1), f"Bowl rank in PDF wrapped or incorrect: {row[0]}")
+                self.assertEqual(row[1], top_bowl.loc[idx, 'player_name'], f"Bowl name in PDF mismatch at rank {idx+1}")
+                self.assertEqual(row[2], str(int(top_bowl.loc[idx, 'player_id'])))
+
+    def test_independent_audit_report_synchronization(self):
+        self.assertTrue(os.path.exists(self.audit_path), "independent_audit_report.md missing")
+        with open(self.audit_path, 'r', encoding='utf-8') as f:
+            audit_text = f.read()
+
+        top_bat = pd.read_csv(self.top_bat_path)
+        top_bowl = pd.read_csv(self.top_bowl_path)
+
+        for _, r in top_bat.iterrows():
+            expected = f"| **{int(r['rank'])}** | **{r['player_name']}** | `{int(r['player_id'])}` |"
+            self.assertIn(expected, audit_text, f"Audit report mismatch for batter {r['player_name']}")
+
+        for _, r in top_bowl.iterrows():
+            expected = f"| **{int(r['rank'])}** | **{r['player_name']}** | `{int(r['player_id'])}` |"
+            self.assertIn(expected, audit_text, f"Audit report mismatch for bowler {r['player_name']}")
+
+
 if __name__ == '__main__':
     unittest.main()

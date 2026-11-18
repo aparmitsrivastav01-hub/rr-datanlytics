@@ -346,14 +346,16 @@ def build_methodology_report(output_pdf_path='reports/SupeRR_Selector_Round_1_Me
             Paragraph(f"{r['p_boundary_pct']:.1f}%", table_cell_center)
         ])
 
-    t_bat = Table(bat_table_data, colWidths=[20, 116, 34, 40, 36, 26, 48, 50, 46, 44, 44])
+    t_bat = Table(bat_table_data, colWidths=[24, 114, 32, 40, 36, 26, 48, 50, 46, 44, 44])
     t_bat.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#1d4ed8')),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#cbd5e1')),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.HexColor('#ffffff'), colors.HexColor('#eff6ff')]),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('TOPPADDING', (0,0), (-1,-1), 3),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 3),
+        ('TOPPADDING', (0,0), (-1,-1), 2.5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 2.5),
+        ('LEFTPADDING', (0,0), (-1,-1), 2),
+        ('RIGHTPADDING', (0,0), (-1,-1), 2),
     ]))
     story.append(t_bat)
     story.append(Spacer(1, 8))
@@ -412,14 +414,16 @@ def build_methodology_report(output_pdf_path='reports/SupeRR_Selector_Round_1_Me
             Paragraph(f"{r['p_dot_pct']:.1f}%", table_cell_center)
         ])
 
-    t_bowl = Table(bowl_table_data, colWidths=[20, 116, 34, 40, 36, 26, 48, 46, 36, 48, 48])
+    t_bowl = Table(bowl_table_data, colWidths=[24, 114, 32, 40, 36, 26, 48, 46, 36, 48, 48])
     t_bowl.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#b91c1c')),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#cbd5e1')),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.HexColor('#ffffff'), colors.HexColor('#fef2f2')]),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('TOPPADDING', (0,0), (-1,-1), 3),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 3),
+        ('TOPPADDING', (0,0), (-1,-1), 2.5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 2.5),
+        ('LEFTPADDING', (0,0), (-1,-1), 2),
+        ('RIGHTPADDING', (0,0), (-1,-1), 2),
     ]))
     story.append(t_bowl)
     story.append(Spacer(1, 8))

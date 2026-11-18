@@ -81,31 +81,47 @@ python generate_report_pdf.py
 
 ---
 
-## 4. Final Rankings Overview
+## 4. Final Rankings Overview (Canonical Audited Results)
 
 ### Top 10 Batters Under Pressure (PRI-Bat)
-1. **Tim David** (PRI: 94.8 | SR: 201.6 | $\Delta$SR: +48.3 | Avg: 37.8)
-2. **Shashank Singh** (PRI: 92.0 | SR: 190.3 | $\Delta$SR: +69.5 | Avg: 69.6)
-3. **Dinesh Karthik** (PRI: 86.1 | SR: 185.7 | $\Delta$SR: +60.8 | Avg: 27.6)
-4. **Naman Dhir** (PRI: 85.6 | SR: 198.8 | $\Delta$SR: +53.4 | Avg: 29.7)
-5. **Donovan Ferreira** (PRI: 81.8 | SR: 192.5 | $\Delta$SR: +63.0 | Avg: 27.7)
-6. **Tristan Stubbs** (PRI: 81.1 | SR: 171.2 | $\Delta$SR: +51.2 | Avg: 33.8)
-7. **Glenn Maxwell** (PRI: 80.8 | SR: 180.6 | $\Delta$SR: +32.0 | Avg: 26.8)
-8. **Reeza Hendricks** (PRI: 80.5 | SR: 170.3 | $\Delta$SR: +39.0 | Avg: 46.4)
-9. **Ashutosh Sharma** (PRI: 80.5 | SR: 177.0 | $\Delta$SR: +53.8 | Avg: 27.3)
-10. **Rishabh Pant** (PRI: 80.4 | SR: 175.7 | $\Delta$SR: +47.0 | Avg: 29.0)
+*Eligibility: Minimum 120 pressure deliveries faced across at least 15 matches.*
+
+| Rank | Player Name | Player ID | PRI-Bat | Balls | Matches | Pressure SR | Base SR | $\Delta$ SR | Pressure Avg | Boundary % |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **1** | **Tim David** | `6396` | **93.4** | 618 | 65 | 201.6 | 153.3 | +48.3 | 37.8 | 29.6% |
+| **2** | **Shashank Singh** | `2756` | **92.0** | 329 | 29 | 190.3 | 120.8 | +69.5 | 69.6 | 27.1% |
+| **3** | **Dinesh Karthik** | `143` | **86.1** | 446 | 51 | 185.7 | 124.9 | +60.8 | 27.6 | 28.3% |
+| **4** | **Naman Dhir** | `37052` | **84.3** | 254 | 31 | 198.8 | 145.4 | +53.4 | 29.7 | 31.1% |
+| **5** | **Donovan Ferreira** | `8182` | **81.2** | 187 | 19 | 192.5 | 129.5 | +63.0 | 27.7 | 27.8% |
+| **6** | **Tristan Stubbs** | `20702` | **80.2** | 632 | 54 | 171.2 | 120.0 | +51.2 | 33.8 | 22.9% |
+| **7** | **Ashutosh Sharma** | `8101` | **80.1** | 278 | 26 | 177.0 | 123.2 | +53.8 | 27.3 | 25.5% |
+| **8** | **Reeza Hendricks** | `768` | **80.0** | 327 | 19 | 170.3 | 131.3 | +39.0 | 46.4 | 26.0% |
+| **9** | **Rishabh Pant** | `4703` | **80.0** | 379 | 37 | 175.7 | 128.7 | +47.0 | 29.0 | 26.6% |
+| **10** | **Glenn Maxwell** | `838` | **79.3** | 371 | 35 | 180.6 | 148.6 | +32.0 | 26.8 | 27.5% |
 
 ### Top 10 Bowlers Under Pressure (PRI-Bowl)
-1. **Mitchell Santner** (PRI: 93.0 | Econ: 6.74 | $\Delta$Econ: +0.65 | Dot%: 39.8% | Wkts: 37)
-2. **Abrar Ahmed** (PRI: 89.8 | Econ: 6.14 | $\Delta$Econ: +0.64 | Dot%: 46.1% | Wkts: 19)
-3. **Mohammad Nawaz** (PRI: 89.3 | Econ: 6.03 | $\Delta$Econ: +1.33 | Dot%: 42.8% | Wkts: 25)
-4. **Sufiyan Muqeem** (PRI: 87.9 | Econ: 5.32 | $\Delta$Econ: +1.01 | Dot%: 54.2% | Wkts: 14)
-5. **Sunil Narine** (PRI: 86.4 | Econ: 6.75 | $\Delta$Econ: +0.02 | Dot%: 38.2% | Wkts: 25)
-6. **Rashid Khan** (PRI: 86.0 | Econ: 7.67 | $\Delta$Econ: -0.50 | Dot%: 37.8% | Wkts: 73)
-7. **Ravi Bishnoi** (PRI: 83.2 | Econ: 8.24 | $\Delta$Econ: -0.39 | Dot%: 38.0% | Wkts: 62)
-8. **Haris Rauf** (PRI: 81.3 | Econ: 8.40 | $\Delta$Econ: -0.05 | Dot%: 41.7% | Wkts: 38)
-9. **Matheesha Pathirana** (PRI: 80.2 | Econ: 7.93 | $\Delta$Econ: -0.29 | Dot%: 37.2% | Wkts: 53)
-10. **Deepak Chahar** (PRI: 79.6 | Econ: 8.31 | $\Delta$Econ: +0.59 | Dot%: 41.9% | Wkts: 17)
+*Eligibility: Minimum 120 pressure legal balls bowled across at least 15 matches.*
+
+| Rank | Player Name | Player ID | PRI-Bowl | Balls | Matches | Pressure Econ | $\Delta$ Econ | Wkts | Strike Rate | Dot % |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **1** | **Mohammad Nawaz** | `2490` | **89.3** | 236 | 22 | 6.03 | +1.33 | 25 | 9.4 | 42.8% |
+| **2** | **Mitchell Santner** | `4101` | **88.9** | 505 | 41 | 6.74 | +0.65 | 37 | 13.6 | 39.8% |
+| **3** | **Rashid Khan** | `4722` | **86.1** | 921 | 87 | 7.67 | -0.50 | 73 | 12.6 | 37.8% |
+| **4** | **Abrar Ahmed** | `5979` | **84.3** | 256 | 27 | 6.14 | +0.64 | 19 | 13.5 | 46.1% |
+| **5** | **Haris Rauf** | `7364` | **82.8** | 410 | 41 | 8.40 | -0.05 | 38 | 10.8 | 41.7% |
+| **6** | **Matheesha Pathirana** | `8661` | **82.4** | 537 | 43 | 7.93 | -0.29 | 53 | 10.1 | 37.2% |
+| **7** | **Sufiyan Muqeem** | `34485` | **80.4** | 212 | 17 | 5.32 | +1.01 | 14 | 15.1 | 54.2% |
+| **8** | **Ravi Bishnoi** | `7503` | **77.7** | 983 | 73 | 8.24 | -0.39 | 62 | 15.9 | 38.0% |
+| **9** | **Mohammad Rishad Hossain** | `8380` | **77.2** | 241 | 24 | 8.29 | +0.08 | 21 | 11.5 | 38.2% |
+| **10** | **Jacob Duffy** | `22920` | **77.0** | 334 | 30 | 8.35 | -0.04 | 28 | 11.9 | 46.1% |
+
+---
+
+## 5. Statistical Framework & Governance Note
+
+- **85% Performance / 15% Exposure:** Performance-related dimensions (execution + resilience deltas) dictate 85% of PRI weight allocation; exposure credibility accounts for 15%.
+- **Empirical Bayesian Shrinkage ($K=60$):** Applied to both absolute metrics and resilience deltas, stabilizing estimates for low-sample performers against cohort priors.
+- **Single Source of Truth:** All published rankings across documentation, CSV exports, and the research methodology PDF are strictly synchronized with the canonical output of `run_pipeline.py`.
 
 ---
 *Developed for Unstop SupeRR Selector Season 2.*
