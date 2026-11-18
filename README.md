@@ -6,7 +6,15 @@ Data-driven analytics engine for **Unstop SupeRR Selector Season 2 (Round 1)**, 
 
 ## 1. Project Overview
 
-Raw aggregate metrics (total runs scored, total wickets taken) fail to distinguish true clutch performers from volume accumulators. The **Pressure Reliability Index (PRI)** quantifies player performance under pressure relative to their baseline across 200,999 deliveries in IPL and T20Is between 2022 and 2026.
+Raw aggregate metrics (total runs scored, total wickets taken) fail to distinguish true clutch performers from volume accumulators. The **Pressure Reliability Index (PRI)** quantifies player performance under pressure relative to their baseline across **200,999 deliveries** spanned across **883 matches** in the IPL, official T20Is, and ACC Men's Emerging / Rising Stars tournaments between 2022 and 2026.
+
+### Dataset Scope & Referential Integrity
+- **Total Deliveries Analyzed:** 200,999 balls (66,769 unique high-pressure deliveries; 33.22%).
+- **Competition Breakdown:**
+  - **Indian Premier League (IPL):** 371 matches across 5 seasons (2022–2026; 87,687 deliveries).
+  - **ICC T20 Internationals (T20I):** 482 matches across bilateral series and ICC tournaments (106,327 deliveries).
+  - **ACC Men's Emerging / Rising Stars:** 30 matches (Emerging Teams Asia Cup 2024 & Rising Stars 2025; 6,985 deliveries), fully integrated into player profiles to evaluate high-upside emerging talent alongside established franchise stars.
+- **Coverage & Abandonment Audit:** 867 matches with ball-by-ball records; exactly 16 matches with zero recorded balls were confirmed pre-toss abandonments (`Match Abandoned`).
 
 ### Key Capabilities
 - **Strict Zero-Leakage Dynamic Match State:** Prior cumulative state (RRR, balls remaining, wickets in hand) evaluated delivery-by-delivery without lookahead leakage.
