@@ -58,7 +58,7 @@ class NumberedCanvas(canvas.Canvas):
         self.setStrokeColor(colors.HexColor("#cbd5e1"))
         self.setLineWidth(0.5)
         self.line(54, 45, 558, 45)
-        self.drawString(54, 32, "CONFIDENTIAL & PROPRIETARY | Prepared for Rajasthan Royals Analytics Group")
+        self.drawString(54, 32, "Unstop SupeRR Selector Season 2 — Round 1 | Independent Research Submission")
         page_text = f"Page {self._pageNumber} of {page_count}"
         self.drawRightString(558, 32, page_text)
         self.restoreState()
@@ -194,7 +194,7 @@ def build_methodology_report(output_pdf_path='reports/SupeRR_Selector_Round_1_Me
         [
             Paragraph("<b>Author:</b> Sports Analytics Group", table_cell_style),
             Paragraph("<b>Target Franchise:</b> Rajasthan Royals", table_cell_style),
-            Paragraph("<b>Scope:</b> IPL & T20I (2022–2026)", table_cell_style),
+            Paragraph("<b>Scope:</b> IPL, T20I & T20 (2022–2026)", table_cell_style),
             Paragraph("<b>Status:</b> Audited Final Submission", table_cell_style)
         ]
     ]
@@ -224,7 +224,7 @@ def build_methodology_report(output_pdf_path='reports/SupeRR_Selector_Round_1_Me
     story.append(Paragraph("2. Dataset Profile & Referential Integrity Audit", h1_style))
     story.append(Paragraph(
         "The supplied data contains 883 matches, 141 competitions, and 28,381 playing-XI entries from 2022 to 2026. "
-        "A rigorous schema audit established: (1) 371 IPL matches across 5 seasons (2022–2026), 482 official T20Is, and 30 ACC Emerging matches; "
+        "A rigorous schema audit established: (1) 371 IPL matches across 5 seasons (2022–2026), 482 official T20Is, and 30 ACC Men's Emerging / Rising Stars matches (6,985 balls; fully integrated into player profiles to evaluate rising prospects alongside senior competitions); "
         "(2) Exactly 16 matches had zero ball records, all caused by pre-toss abandonment (Match Abandoned); (3) 22 matches contained only 1 completed innings; "
         "(4) 6 matches featured Super Overs (Innings 3 & 4); (5) Crucially, multiple players share identical names (e.g., Abdul Samad ID 7446 vs 6922; "
         "Basil Hameed ID 8638 vs 39444; Haider Ali ID 7338 vs 28756). All aggregations are strictly keyed on unique <code>player_id</code>s to prevent cross-contamination.",
@@ -271,10 +271,11 @@ def build_methodology_report(output_pdf_path='reports/SupeRR_Selector_Round_1_Me
 
     story.append(Paragraph("5. PRI Mathematical Framework & Component Weights", h1_style))
     story.append(Paragraph(
-        "PRI synthesizes three balanced dimensions: Absolute Pressure Execution (50%), Elevation / Resilience Delta (35%), "
-        "and Exposure Credibility (15%). Performance-related components account for <b>85% of the composite PRI weighting</b>, "
-        "while exposure credibility accounts for <b>15%</b>. Post-audit, PRI-Bowl incorporates <b>Wicket Strike Rate (15% weight)</b>, "
-        "ensuring dual run containment and breakthrough capability. Empirical Bayesian shrinkage (K = 60 balls) is applied to both absolute and delta metrics.",
+        "PRI synthesizes three balanced dimensions: Absolute Pressure Execution, Elevation / Resilience Delta, and Exposure Credibility. "
+        "In batting (PRI-Bat), weights are structured across Absolute Execution (50%), Resilience Delta (35%), and Exposure (15%). "
+        "In bowling (PRI-Bowl), post-audit incorporation of Wicket Strike Rate (15% weight) establishes Absolute Execution (60%), Tightening Delta (25%), "
+        "and Exposure (15%). Across both disciplines, performance-related components account for exactly <b>85% of the composite PRI weighting</b>, "
+        "while exposure credibility accounts for <b>15%</b>. Empirical Bayesian shrinkage (K = 60 balls) is applied to both absolute and delta metrics.",
         body_style
     ))
 
@@ -462,6 +463,8 @@ def build_methodology_report(output_pdf_path='reports/SupeRR_Selector_Round_1_Me
         [Paragraph("Strict Threshold (RRR ≥ 11, Death ≤ 24)", table_cell_bold), Paragraph("51,014 (25.4%)", table_cell_center), Paragraph("<b>0.8929</b> (70%)", table_cell_center), Paragraph("<b>0.9100</b> (70%)", table_cell_center), Paragraph("Extremely Robust", table_cell_center)],
         [Paragraph("Baseline Framework (RRR ≥ 10, Death ≤ 30)", table_cell_bold), Paragraph("66,769 (33.2%)", table_cell_center), Paragraph("<b>1.0000</b> (100%)", table_cell_center), Paragraph("<b>1.0000</b> (100%)", table_cell_center), Paragraph("Benchmark Model", table_cell_center)],
         [Paragraph("Relaxed Threshold (RRR ≥ 9, Death ≤ 36)", table_cell_bold), Paragraph("83,245 (41.4%)", table_cell_center), Paragraph("<b>0.9308</b> (70%)", table_cell_center), Paragraph("<b>0.8934</b> (70%)", table_cell_center), Paragraph("Highly Robust", table_cell_center)],
+        [Paragraph("Sample Size Cutoff = 100 Balls", table_cell_bold), Paragraph("66,769 (33.2%)", table_cell_center), Paragraph("<b>0.9997</b> (100%)", table_cell_center), Paragraph("<b>0.9999</b> (100%)", table_cell_center), Paragraph("100% Overlap", table_cell_center)],
+        [Paragraph("Sample Size Cutoff = 150 Balls", table_cell_bold), Paragraph("66,769 (33.2%)", table_cell_center), Paragraph("<b>0.9991</b> (100%)", table_cell_center), Paragraph("<b>0.9994</b> (100%)", table_cell_center), Paragraph("100% Overlap", table_cell_center)],
         [Paragraph("Bayesian Shrinkage K = 40 / 80", table_cell_bold), Paragraph("66,769 (33.2%)", table_cell_center), Paragraph("<b>0.9995 / 0.9993</b>", table_cell_center), Paragraph("<b>0.9992 / 0.9996</b>", table_cell_center), Paragraph("Near Perfect", table_cell_center)]
     ]
     t_sens = Table(sens_data, colWidths=[140, 80, 100, 100, 84])
@@ -470,16 +473,16 @@ def build_methodology_report(output_pdf_path='reports/SupeRR_Selector_Round_1_Me
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#cbd5e1')),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.HexColor('#ffffff'), colors.HexColor('#f8fafc')]),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('TOPPADDING', (0,0), (-1,-1), 3),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 3),
+        ('TOPPADDING', (0,0), (-1,-1), 2),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 2),
     ]))
     story.append(t_sens)
-    story.append(Spacer(1, 6))
+    story.append(Spacer(1, 4))
 
     if os.path.exists('reports/figures/fig4_pri_scores.png'):
-        story.append(Image('reports/figures/fig4_pri_scores.png', width=6.2*inch, height=2.3*inch))
+        story.append(Image('reports/figures/fig4_pri_scores.png', width=6.2*inch, height=2.1*inch))
         story.append(Paragraph("<b>Figure 4:</b> Audited Top 10 PRI Score Distributions for Batters and Bowlers (0–100 Scale).", callout_style))
-        story.append(Spacer(1, 6))
+        story.append(Spacer(1, 4))
 
     story.append(Paragraph("9. Limitations & Strategic Recommendations for Rajasthan Royals (IPL 2027)", h1_style))
     story.append(Paragraph(
