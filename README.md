@@ -79,6 +79,11 @@ python -m unittest tests/test_pipeline.py
 python generate_report_pdf.py
 ```
 
+### Step 5: Run Automated Consistency Verification
+```bash
+python verify_submission_consistency.py
+```
+
 ---
 
 ## 4. Final Rankings Overview (Canonical Audited Results)
